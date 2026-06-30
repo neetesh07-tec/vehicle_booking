@@ -1,0 +1,19 @@
+<%- include('partials/header') %>
+
+<section class="auth">
+  <h1>Create Customer Account</h1>
+  <form action="/register" method="POST" class="form">
+    <label>Name</label>
+    <input type="text" name="name" required>
+
+    <label>Email</label>
+    <input type="email" name="email" required>
+
+    <label>Password</label>
+    <input type="password" name="password" minlength="6" required>
+
+    <button type="submit">Register</button>
+  </form>
+</section>
+
+<%- include('partials/footer') %>

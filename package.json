@@ -1,0 +1,26 @@
+{
+  "name": "car-booking-system",
+  "version": "1.0.0",
+  "description": "Role based car booking system using EJS, PostgreSQL, and JavaScript.",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "check-db": "node scripts/check-db.js",
+    "init-db": "node scripts/init-db.js",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "method-override": "^3.0.0",
+    "multer": "^2.2.0",
+    "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

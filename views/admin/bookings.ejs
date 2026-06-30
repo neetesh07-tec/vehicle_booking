@@ -1,0 +1,51 @@
+<%- include('../partials/header') %>
+
+<div class="page-title">
+  <div>
+    <h1>Booking Requests</h1>
+    <p>Approve or reject customer booking requests.</p>
+  </div>
+</div>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Customer</th>
+        <th>Car</th>
+        <th>Dates</th>
+        <th>Status</th>
+        <th>Decision</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% bookings.forEach((booking) => { %>
+        <tr>
+          <td><strong><%= booking.customer_name %></strong><br><%= booking.email %></td>
+          <td><%= booking.brand %> <%= booking.model %><br><small><%= booking.message || '' %></small></td>
+          <td><%= formatDate(booking.start_date) %> to <%= formatDate(booking.end_date) %></td>
+          <td><span class="badge <%= booking.status %>"><%= booking.status %></span></td>
+          <td class="actions">
+            <% if (booking.status === 'pending') { %>
+              <form action="/admin/bookings/<%= booking.id %>/status" method="POST" class="inline">
+                <input type="hidden" name="status" value="approved">
+                <button type="submit">Approve</button>
+              </form>
+              <form action="/admin/bookings/<%= booking.id %>/status" method="POST" class="inline">
+                <input type="hidden" name="status" value="rejected">
+                <button type="submit">Reject</button>
+              </form>
+            <% } else { %>
+              Done
+            <% } %>
+          </td>
+        </tr>
+      <% }) %>
+      <% if (!bookings.length) { %>
+        <tr><td colspan="5">No bookings yet.</td></tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../partials/footer') %>

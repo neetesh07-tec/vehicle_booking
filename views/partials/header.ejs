@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Booking</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">Car Booking</a>
+    <nav>
+      <% if (user && user.role === 'admin') { %>
+        <a href="/admin/cars">Cars</a>
+        <a href="/admin/bookings">Bookings</a>
+      <% } %>
+      <% if (user && user.role === 'customer') { %>
+        <a href="/customer/cars">Browse Cars</a>
+        <a href="/customer/bookings">My Bookings</a>
+      <% } %>
+      <% if (user) { %>
+        <span><%= user.name %></span>
+        <form action="/logout" method="POST" class="inline">
+          <button type="submit">Logout</button>
+        </form>
+      <% } else { %>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+      <% } %>
+    </nav>
+  </header>
+  <main class="container">
+    <% if (error) { %><p class="alert error"><%= error %></p><% } %>
+    <% if (success) { %><p class="alert success"><%= success %></p><% } %>

@@ -1,0 +1,27 @@
+<%- include('../partials/header') %>
+
+<section class="panel">
+  <h1>Book <%= car.brand %> <%= car.model %></h1>
+  <% if (car.image_url) { %>
+    <img class="car-image detail" src="<%= car.image_url %>" alt="<%= car.brand %> <%= car.model %>">
+  <% } %>
+  <p><%= car.location %> - Rs. <%= car.price_per_day %>/day</p>
+
+  <form class="form" method="POST" action="/customer/cars/<%= car.id %>/book">
+    <label>Start Date</label>
+    <input type="date" name="start_date" required>
+
+    <label>End Date</label>
+    <input type="date" name="end_date" required>
+
+    <label>Message</label>
+    <textarea name="message" rows="4" placeholder="Pickup time, trip notes, or questions"></textarea>
+
+    <div class="form-actions">
+      <button type="submit">Send Request</button>
+      <a href="/customer/cars">Cancel</a>
+    </div>
+  </form>
+</section>
+
+<%- include('../partials/footer') %>

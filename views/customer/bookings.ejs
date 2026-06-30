@@ -1,0 +1,36 @@
+<%- include('../partials/header') %>
+
+<div class="page-title">
+  <div>
+    <h1>My Bookings</h1>
+    <p>Track your previous and current booking requests.</p>
+  </div>
+</div>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Car</th>
+        <th>Dates</th>
+        <th>Price</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% bookings.forEach((booking) => { %>
+        <tr>
+          <td><%= booking.brand %> <%= booking.model %></td>
+          <td><%= formatDate(booking.start_date) %> to <%= formatDate(booking.end_date) %></td>
+          <td>₹<%= booking.price_per_day %>/day</td>
+          <td><span class="badge <%= booking.status %>"><%= booking.status %></span></td>
+        </tr>
+      <% }) %>
+      <% if (!bookings.length) { %>
+        <tr><td colspan="4">No bookings yet.</td></tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../partials/footer') %>

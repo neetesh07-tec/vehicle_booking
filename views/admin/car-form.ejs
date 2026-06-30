@@ -1,0 +1,55 @@
+<%- include('../partials/header') %>
+
+<section class="panel">
+  <h1><%= car ? 'Edit Car' : 'Add Car' %></h1>
+  <form class="form grid" method="POST" enctype="multipart/form-data" action="<%= car ? `/admin/cars/${car.id}?_method=PUT` : '/admin/cars' %>">
+    <label>Brand</label>
+    <input name="brand" value="<%= car ? car.brand : '' %>" required>
+
+    <label>Model</label>
+    <input name="model" value="<%= car ? car.model : '' %>" required>
+
+    <label>Year</label>
+    <input type="number" name="year" value="<%= car ? car.year : '' %>" required>
+
+    <label>Price Per Day</label>
+    <input type="number" step="0.01" name="price_per_day" value="<%= car ? car.price_per_day : '' %>" required>
+
+    <label>Fuel Type</label>
+    <select name="fuel_type" required>
+      <% ['Petrol', 'Diesel', 'CNG', 'Electric'].forEach((fuel) => { %>
+        <option value="<%= fuel %>" <%= car && car.fuel_type === fuel ? 'selected' : '' %>><%= fuel %></option>
+      <% }) %>
+    </select>
+
+    <label>Seats</label>
+    <input type="number" name="seats" value="<%= car ? car.seats : '' %>" required>
+
+    <label>Location</label>
+    <input name="location" value="<%= car ? car.location : '' %>" required>
+
+    <label>Status</label>
+    <select name="status" required>
+      <option value="available" <%= car && car.status === 'available' ? 'selected' : '' %>>Available</option>
+      <option value="unavailable" <%= car && car.status === 'unavailable' ? 'selected' : '' %>>Unavailable</option>
+    </select>
+
+    <label>Description</label>
+    <textarea name="description" rows="4"><%= car ? car.description : '' %></textarea>
+
+    <label>Car Image</label>
+    <div>
+      <% if (car && car.image_url) { %>
+        <img class="preview" src="<%= car.image_url %>" alt="<%= car.brand %> <%= car.model %>">
+      <% } %>
+      <input type="file" name="image" accept="image/*">
+    </div>
+
+    <div class="form-actions">
+      <button type="submit">Save</button>
+      <a href="/admin/cars">Cancel</a>
+    </div>
+  </form>
+</section>
+
+<%- include('../partials/footer') %>
